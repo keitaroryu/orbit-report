@@ -8,16 +8,9 @@ import { Satellite } from './satellite';
 })
 export class AppComponent {
   sourceList: Satellite[];
-  displayList: Satellite[]
+  displayList: Satellite[];
 
   constructor() {
-    // this.sourceList = [
-    //   new Satellite("SiriusXM", "Communication", "2009-03-21", "LOW", true),
-    //   new Satellite("Cat Scanner", "Imaging", "2012-01-05", "LOW", true),
-    //   new Satellite("Weber Grill", "Space Debris", "1996-03-25", "HIGH", false),
-    //   new Satellite("GPS 938", "Positioning", "2001-11-01", "HIGH", true),
-    //   new Satellite("ISS", "Space Station", "1998-11-20", "LOW", true),
-    // ];
     this.displayList = [];
     this.sourceList = [];
     let satellitesUrl = 'https://handlers.education.launchcode.org/static/satellites.json';
@@ -31,7 +24,8 @@ export class AppComponent {
           }
         // make a copy of the sourceList to be shown to the user
         this.displayList = this.sourceList.slice(0);
-        
+        this.typeCounter(this.displayList);
+
         }.bind(this));
     }.bind(this));
 
@@ -41,8 +35,10 @@ export class AppComponent {
     let matchingSatellites: Satellite[] = [];
     searchTerm = searchTerm.toLowerCase();
     for(let i=0; i < this.sourceList.length; i++) {
-      let name = this.sourceList[i].name.toLowerCase();
-      if (name.indexOf(searchTerm) >= 0) {
+      let name:string = this.sourceList[i].name.toLowerCase();
+      let type:string = this.sourceList[i].type.toLowerCase();
+      let orbitType:string = this.sourceList[i].orbitType.toLowerCase();
+      if (name.indexOf(searchTerm) >= 0 || type.indexOf(searchTerm) >= 0 || orbitType.indexOf(searchTerm) >= 0) {
         matchingSatellites.push(this.sourceList[i]);
       }
     }

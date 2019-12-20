@@ -9,7 +9,6 @@ import { Satellite } from '../satellite';
 export class OrbitListComponent implements OnInit {
 
   @Input() satellites: Satellite[];
-  colorSwitch:number = -1;
 
   constructor() { }
 
@@ -26,15 +25,6 @@ export class OrbitListComponent implements OnInit {
       }
       return 0;
     });
-  }
-
-  alternateColor():boolean {
-    this.colorSwitch = this.colorSwitch*-1;
-    if(this.colorSwitch===1) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
 }
